@@ -346,7 +346,7 @@ class SpyClearBGApp:
                         spacing=0
                     ),
                     ft.VerticalDivider(width=20, color="#2D3F34"),
-                    ft.Text("v1.0.2", size=10, color=ft.Colors.GREY_500, weight=ft.FontWeight.W_300),
+                    ft.Text("v1.0.3", size=10, color=ft.Colors.GREY_500, weight=ft.FontWeight.W_300),
                     ft.VerticalDivider(width=20, color="#2D3F34"),
                     ft.IconButton(
                         icon=ft.CupertinoIcons.QUESTION_CIRCLE,
@@ -610,7 +610,7 @@ class SpyClearBGApp:
                     size=11
                 ),
                 ft.Divider(color="#2D3F34", height=15),
-                ft.Text("Έκδοση: v1.0.2 (build 3) | Δημιουργήθηκε με Flet & rembg.", size=10, italic=True, color=ft.Colors.GREY_500)
+                ft.Text("Έκδοση: v1.0.3 (build 4) | Δημιουργήθηκε με Flet & rembg.", size=10, italic=True, color=ft.Colors.GREY_500)
             ],
             spacing=10,
             scroll=ft.ScrollMode.AUTO,
@@ -1172,6 +1172,13 @@ def main(page: ft.Page):
     app = SpyClearBGApp(page)
     app.build_layout()
     page.update()
+    
+    # Κλείσιμο του PyInstaller Splash Screen (αν υπάρχει)
+    try:
+        import pyi_splash
+        pyi_splash.close()
+    except ImportError:
+        pass
 
 if __name__ == "__main__":
     ft.run(main)
