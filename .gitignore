@@ -3,6 +3,3 @@ __pycache__/
 build/
 dist/
 *.pyc
-.agents/
-instructions.md
-splash.jpg
