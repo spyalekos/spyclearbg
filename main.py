@@ -86,7 +86,7 @@ class SpyClearBGApp:
             expand=True
         )
         
-        self.btn_select_folder = ft.ElevatedButton(
+        self.btn_select_folder = ft.Button(
             "Επιλογή Φακέλου",
             icon=ft.CupertinoIcons.FOLDER,
             on_click=self.select_folder_click,
@@ -115,7 +115,7 @@ class SpyClearBGApp:
             fill_color={"": ft.Colors.GREEN}
         )
         
-        self.btn_process_selected = ft.ElevatedButton(
+        self.btn_process_selected = ft.Button(
             "Αφαίρεση στα Επιλεγμένα",
             icon=ft.CupertinoIcons.PLAY_FILL,
             on_click=lambda _: self.start_bulk_processing(),
@@ -179,7 +179,7 @@ class SpyClearBGApp:
         )
         
         # Preview Section Buttons
-        self.btn_process_current = ft.ElevatedButton(
+        self.btn_process_current = ft.Button(
             "Έναρξη Αφαίρεσης Φόντου",
             icon=ft.CupertinoIcons.PLAY_FILL,
             disabled=True,
@@ -346,7 +346,7 @@ class SpyClearBGApp:
                         spacing=0
                     ),
                     ft.VerticalDivider(width=20, color="#2D3F34"),
-                    ft.Text("v1.0.1", size=10, color=ft.Colors.GREY_500, weight=ft.FontWeight.W_300),
+                    ft.Text("v1.0.2", size=10, color=ft.Colors.GREY_500, weight=ft.FontWeight.W_300),
                     ft.VerticalDivider(width=20, color="#2D3F34"),
                     ft.IconButton(
                         icon=ft.CupertinoIcons.QUESTION_CIRCLE,
@@ -610,7 +610,7 @@ class SpyClearBGApp:
                     size=11
                 ),
                 ft.Divider(color="#2D3F34", height=15),
-                ft.Text("Έκδοση: v1.0.1 (build 2) | Δημιουργήθηκε με Flet & rembg.", size=10, italic=True, color=ft.Colors.GREY_500)
+                ft.Text("Έκδοση: v1.0.2 (build 3) | Δημιουργήθηκε με Flet & rembg.", size=10, italic=True, color=ft.Colors.GREY_500)
             ],
             spacing=10,
             scroll=ft.ScrollMode.AUTO,
@@ -623,14 +623,10 @@ class SpyClearBGApp:
             actions=[close_btn],
             actions_alignment=ft.MainAxisAlignment.END
         )
-        self.page.dialog = self.help_dialog
-        self.help_dialog.open = True
-        self.page.update()
+        self.page.show_dialog(self.help_dialog)
 
     def close_help_dialog(self, e):
-        if hasattr(self, 'help_dialog'):
-            self.help_dialog.open = False
-            self.page.update()
+        self.page.pop_dialog()
         
     def get_file_size_str(self, path):
         try:
@@ -1178,4 +1174,4 @@ def main(page: ft.Page):
     page.update()
 
 if __name__ == "__main__":
-    ft.app(target=main)
+    ft.run(main)
