@@ -40,7 +40,7 @@ a = Analysis(
 pyz = PYZ(a.pure)
 
 splash = Splash(
-    'splash.jpg',
+    'assets/splash.jpg',
     binaries=a.binaries,
     datas=a.datas,
     text_pos=None,

@@ -346,7 +346,7 @@ class SpyClearBGApp:
                         spacing=0
                     ),
                     ft.VerticalDivider(width=20, color="#2D3F34"),
-                    ft.Text("v1.0.5", size=10, color=ft.Colors.GREY_500, weight=ft.FontWeight.W_300),
+                    ft.Text("v1.0.6", size=10, color=ft.Colors.GREY_500, weight=ft.FontWeight.W_300),
                     ft.VerticalDivider(width=20, color="#2D3F34"),
                     ft.IconButton(
                         icon=ft.CupertinoIcons.QUESTION_CIRCLE,
@@ -612,7 +612,7 @@ class SpyClearBGApp:
                 ft.Divider(color="#2D3F34", height=15),
                 ft.Text(
                     spans=[
-                        ft.TextSpan("Έκδοση: v1.0.5 (build 6) | "),
+                        ft.TextSpan("Έκδοση: v1.0.6 (build 7) | "),
                         ft.TextSpan(
                             "Δημιουργός: spyalekos",
                             url="https://github.com/spyalekos",
@@ -1157,7 +1157,7 @@ class SpyClearBGApp:
 
 def main(page: ft.Page):
     # Ρύθμιση παραθύρου
-    page.title = "SpyClearBG - Αφαίρεση Φόντου"
+    page.title = "SpyClearBG v1.0.6 - Αφαίρεση Φόντου"
     page.window_width = 1200
     page.window_height = 820
     page.window_min_width = 1000
