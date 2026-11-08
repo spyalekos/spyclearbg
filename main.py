@@ -7,7 +7,7 @@ if sys.stdout is None:
 if sys.stderr is None:
     sys.stderr = open(os.devnull, "w", encoding="utf-8")
 
-# Point FLET_VIEW_PATH to bundled flet.exe inside PyInstaller sys._MEIPASS
+# Point FLET_VIEW_PATH to bundled flet.exe inside PyInstaller sys._MEIPASS if present
 if getattr(sys, "frozen", False):
     meipass = getattr(sys, "_MEIPASS", os.path.dirname(sys.executable))
     candidates = [
@@ -392,7 +392,7 @@ class SpyClearBGApp:
                         spacing=0
                     ),
                     ft.VerticalDivider(width=20, color="#2D3F34"),
-                    ft.Text("v1.1.0", size=10, color=ft.Colors.GREY_500, weight=ft.FontWeight.W_300),
+                    ft.Text("v1.1.1", size=10, color=ft.Colors.GREY_500, weight=ft.FontWeight.W_300),
                     ft.VerticalDivider(width=20, color="#2D3F34"),
                     ft.IconButton(
                         icon=ft.CupertinoIcons.QUESTION_CIRCLE,
@@ -658,7 +658,7 @@ class SpyClearBGApp:
                 ft.Divider(color="#2D3F34", height=20),
                 ft.Text(
                     spans=[
-                        ft.TextSpan("Έκδοση: v1.1.0 (build 11) | "),
+                        ft.TextSpan("Έκδοση: v1.1.1 (build 12) | "),
                         ft.TextSpan(
                             "Δημιουργός: SpyAlekos",
                             url="https://github.com/spyalekos",
@@ -1207,7 +1207,7 @@ class SpyClearBGApp:
 
 def main(page: ft.Page):
     # Ρύθμιση παραθύρου
-    page.title = "SpyClearBG v1.1.0 - Αφαίρεση Φόντου"
+    page.title = "SpyClearBG v1.1.1 - Αφαίρεση Φόντου"
     page.window_width = 1200
     page.window_height = 820
     page.window_min_width = 1000

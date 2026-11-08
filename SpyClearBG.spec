@@ -1,6 +1,6 @@
 # -*- mode: python ; coding: utf-8 -*-
 import os
-from PyInstaller.utils.hooks import collect_all
+from PyInstaller.utils.hooks import collect_all, copy_metadata
 from PyInstaller.building.api import Splash
 
 datas = []
@@ -11,12 +11,6 @@ hiddenimports = []
 
 # Collect Flet
 tmp_ret = collect_all('flet')
-datas.extend(tmp_ret[0])
-binaries.extend(tmp_ret[1])
-hiddenimports.extend(tmp_ret[2])
-
-# Collect Flet Desktop
-tmp_ret = collect_all('flet_desktop')
 datas.extend(tmp_ret[0])
 binaries.extend(tmp_ret[1])
 hiddenimports.extend(tmp_ret[2])
@@ -32,6 +26,9 @@ tmp_ret = collect_all('onnxruntime')
 datas.extend(tmp_ret[0])
 binaries.extend(tmp_ret[1])
 hiddenimports.extend(tmp_ret[2])
+
+# Collect PyMatting metadata for rembg (fixes PackageNotFoundError)
+datas.extend(copy_metadata('pymatting'))
 
 a = Analysis(
     ['main.py'],
@@ -70,7 +67,7 @@ exe = EXE(
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
-    upx=False,
+    upx=True,
     upx_exclude=[],
     runtime_tmpdir=None,
     console=False,
