@@ -103,7 +103,7 @@ class SpyClearBGApp:
             height=36,
             content_padding=ft.Padding(8, 8, 8, 8),
             bgcolor="#1A261F",
-            border_color="#2D3F34",
+            border=ft.OutlineInputBorder(side=ft.BorderSide(color="#2D3F34")),
             expand=True,
             on_change=lambda _: self.build_images_list_ui()
         )
@@ -237,7 +237,7 @@ class SpyClearBGApp:
                 ft.dropdown.Option("isnet-anime", "Anime / Σχέδια (isnet-anime)"),
             ],
             bgcolor="#1A261F",
-            border_color="#2D3F34",
+            border=ft.OutlineInputBorder(side=ft.BorderSide(color="#2D3F34")),
         )
         self.dropdown_model.on_change = self.on_setting_changed
         
@@ -322,7 +322,7 @@ class SpyClearBGApp:
             text_size=12,
             height=45,
             bgcolor="#1A261F",
-            border_color="#2D3F34",
+            border=ft.OutlineInputBorder(side=ft.BorderSide(color="#2D3F34")),
             on_change=self.on_setting_changed
         )
         
@@ -346,7 +346,7 @@ class SpyClearBGApp:
                         spacing=0
                     ),
                     ft.VerticalDivider(width=20, color="#2D3F34"),
-                    ft.Text("v1.0.6", size=10, color=ft.Colors.GREY_500, weight=ft.FontWeight.W_300),
+                    ft.Text("v1.0.9", size=10, color=ft.Colors.GREY_500, weight=ft.FontWeight.W_300),
                     ft.VerticalDivider(width=20, color="#2D3F34"),
                     ft.IconButton(
                         icon=ft.CupertinoIcons.QUESTION_CIRCLE,
@@ -582,23 +582,23 @@ class SpyClearBGApp:
     def show_help_click(self, e):
         help_content = ft.Column(
             controls=[
-                ft.Text("SpyClearBG - Οδηγίες Χρήσης", size=16, weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_400),
+                ft.Text("SpyClearBG - Οδηγίες Χρήσης", size=24, weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_400),
                 ft.Text(
                     "Η εφαρμογή αυτή αφαιρεί αυτόματα το φόντο από φωτογραφίες χρησιμοποιώντας "
                     "μοντέλα Τεχνητής Νοημοσύνης (rembg).\n",
-                    size=12
+                    size=18
                 ),
-                ft.Text("Βήματα Λειτουργίας:", weight=ft.FontWeight.BOLD, size=13, color=ft.Colors.WHITE),
+                ft.Text("Βήματα Λειτουργίας:", weight=ft.FontWeight.BOLD, size=20, color=ft.Colors.WHITE),
                 ft.Text(
                     "1. Πατήστε 'Επιλογή Φακέλου' για να επιλέξετε τον κατάλογο με τις εικόνες σας.\n"
                     "2. Επιλέξτε μια εικόνα από τη λίστα στα αριστερά για side-by-side προεπισκόπηση.\n"
                     "3. Ρυθμίστε τις παραμέτρους (μοντέλο AI, Alpha Matting, χρώμα φόντου) στην καρτέλα 'Ρυθμίσεις RemBG' αν χρειάζεται.\n"
                     "4. Πατήστε 'Έναρξη Αφαίρεσης Φόντου' για τη συγκεκριμένη εικόνα, ή χρησιμοποιήστε τα Checkboxes και πατήστε 'Αφαίρεση στα Επιλεγμένα' για ομαδική επεξεργασία.\n"
                     "5. Οι επεξεργασμένες εικόνες αποθηκεύονται στον ίδιο φάκελο με την κατάληξη '_nobg.png'.",
-                    size=12
+                    size=18
                 ),
-                ft.Divider(color="#2D3F34", height=15),
-                ft.Text("Επεξήγηση Μοντέλων AI:", weight=ft.FontWeight.BOLD, size=13, color=ft.Colors.WHITE),
+                ft.Divider(color="#2D3F34", height=20),
+                ft.Text("Επεξήγηση Μοντέλων AI:", weight=ft.FontWeight.BOLD, size=20, color=ft.Colors.WHITE),
                 ft.Text(
                     "- u2net: Το προεπιλεγμένο μοντέλο γενικής χρήσης.\n"
                     "- u2netp: Ελαφρύ/γρήγορο μοντέλο για συσκευές με χαμηλούς πόρους.\n"
@@ -607,30 +607,34 @@ class SpyClearBGApp:
                     "- siluela: Εξειδικευμένο για σιλουέτες και προϊόντα.\n"
                     "- isnet-general-use: Νέο μοντέλο γενικής χρήσης υψηλής ακρίβειας.\n"
                     "- isnet-anime: Εξειδικευμένο για anime / σκίτσα.",
-                    size=11
+                    size=17
                 ),
-                ft.Divider(color="#2D3F34", height=15),
+                ft.Divider(color="#2D3F34", height=20),
                 ft.Text(
                     spans=[
-                        ft.TextSpan("Έκδοση: v1.0.6 (build 7) | "),
+                        ft.TextSpan("Έκδοση: v1.0.9 (build 10) | "),
                         ft.TextSpan(
-                            "Δημιουργός: spyalekos",
+                            "Δημιουργός: SpyAlekos",
                             url="https://github.com/spyalekos",
-                            style=ft.TextStyle(color=ft.Colors.GREEN_400, decoration=ft.TextDecoration.UNDERLINE)
+                            style=ft.TextStyle(color=ft.Colors.GREEN_400)
                         ),
                         ft.TextSpan(" | Δημιουργήθηκε με Flet & rembg.")
                     ],
-                    size=10,
+                    size=15,
                     italic=True,
                     color=ft.Colors.GREY_500
                 )
             ],
-            spacing=10,
+            spacing=12,
             scroll=ft.ScrollMode.AUTO,
-            height=400
+            width=700,
+            height=520
         )
         
-        close_btn = ft.TextButton("Κλείσιμο", on_click=self.close_help_dialog)
+        close_btn = ft.TextButton(
+            content=ft.Text("Κλείσιμο", size=16),
+            on_click=self.close_help_dialog
+        )
         self.help_dialog = ft.AlertDialog(
             content=help_content,
             actions=[close_btn],
@@ -1157,7 +1161,7 @@ class SpyClearBGApp:
 
 def main(page: ft.Page):
     # Ρύθμιση παραθύρου
-    page.title = "SpyClearBG v1.0.6 - Αφαίρεση Φόντου"
+    page.title = "SpyClearBG v1.0.9 - Αφαίρεση Φόντου"
     page.window_width = 1200
     page.window_height = 820
     page.window_min_width = 1000

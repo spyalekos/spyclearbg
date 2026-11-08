@@ -12,6 +12,12 @@ datas.extend(tmp_ret[0])
 binaries.extend(tmp_ret[1])
 hiddenimports.extend(tmp_ret[2])
 
+# Collect Flet Desktop
+tmp_ret = collect_all('flet_desktop')
+datas.extend(tmp_ret[0])
+binaries.extend(tmp_ret[1])
+hiddenimports.extend(tmp_ret[2])
+
 # Collect Rembg
 tmp_ret = collect_all('rembg')
 datas.extend(tmp_ret[0])
