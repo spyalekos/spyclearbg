@@ -1,8 +1,11 @@
 # -*- mode: python ; coding: utf-8 -*-
+import os
 from PyInstaller.utils.hooks import collect_all
 from PyInstaller.building.api import Splash
 
 datas = []
+if os.path.exists('assets'):
+    datas.append(('assets', 'assets'))
 binaries = []
 hiddenimports = []
 
@@ -67,7 +70,7 @@ exe = EXE(
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
-    upx=True,
+    upx=False,
     upx_exclude=[],
     runtime_tmpdir=None,
     console=False,

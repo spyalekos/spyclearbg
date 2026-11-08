@@ -1,4 +1,50 @@
 import os
+import sys
+
+# Ensure stdout and stderr are never None in windowed/non-console mode
+if sys.stdout is None:
+    sys.stdout = open(os.devnull, "w", encoding="utf-8")
+if sys.stderr is None:
+    sys.stderr = open(os.devnull, "w", encoding="utf-8")
+
+# Point FLET_VIEW_PATH to bundled flet.exe inside PyInstaller sys._MEIPASS
+if getattr(sys, "frozen", False):
+    meipass = getattr(sys, "_MEIPASS", os.path.dirname(sys.executable))
+    candidates = [
+        os.path.join(meipass, "flet_desktop", "app", "flet"),
+        os.path.join(meipass, "flet_desktop", "app"),
+        os.path.join(meipass, "flet"),
+        meipass,
+    ]
+    for c in candidates:
+        if os.path.isfile(os.path.join(c, "flet.exe")):
+            os.environ["FLET_VIEW_PATH"] = c
+            break
+
+import traceback
+
+def crash_handler(exc_type, exc_value, exc_traceback):
+    try:
+        import pyi_splash
+        pyi_splash.close()
+    except Exception:
+        pass
+    
+    err_text = "".join(traceback.format_exception(exc_type, exc_value, exc_traceback))
+    try:
+        app_dir = os.path.dirname(sys.executable) if getattr(sys, "frozen", False) else os.path.dirname(os.path.abspath(__file__))
+        with open(os.path.join(app_dir, "spyclearbg_crash.log"), "w", encoding="utf-8") as f:
+            f.write(err_text)
+    except Exception:
+        pass
+    try:
+        import ctypes
+        ctypes.windll.user32.MessageBoxW(0, f"Σφάλμα εκτέλεσης SpyClearBG:\n\n{err_text}", "SpyClearBG Crash Error", 0x10)
+    except Exception:
+        pass
+
+sys.excepthook = crash_handler
+
 import glob
 import threading
 import base64
@@ -346,7 +392,7 @@ class SpyClearBGApp:
                         spacing=0
                     ),
                     ft.VerticalDivider(width=20, color="#2D3F34"),
-                    ft.Text("v1.0.9", size=10, color=ft.Colors.GREY_500, weight=ft.FontWeight.W_300),
+                    ft.Text("v1.1.0", size=10, color=ft.Colors.GREY_500, weight=ft.FontWeight.W_300),
                     ft.VerticalDivider(width=20, color="#2D3F34"),
                     ft.IconButton(
                         icon=ft.CupertinoIcons.QUESTION_CIRCLE,
@@ -612,7 +658,7 @@ class SpyClearBGApp:
                 ft.Divider(color="#2D3F34", height=20),
                 ft.Text(
                     spans=[
-                        ft.TextSpan("Έκδοση: v1.0.9 (build 10) | "),
+                        ft.TextSpan("Έκδοση: v1.1.0 (build 11) | "),
                         ft.TextSpan(
                             "Δημιουργός: SpyAlekos",
                             url="https://github.com/spyalekos",
@@ -1161,7 +1207,7 @@ class SpyClearBGApp:
 
 def main(page: ft.Page):
     # Ρύθμιση παραθύρου
-    page.title = "SpyClearBG v1.0.9 - Αφαίρεση Φόντου"
+    page.title = "SpyClearBG v1.1.0 - Αφαίρεση Φόντου"
     page.window_width = 1200
     page.window_height = 820
     page.window_min_width = 1000
